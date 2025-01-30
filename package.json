@@ -5,7 +5,9 @@
   "author": "Dirk Lüdtke",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "dev-build": "tsc --watch",
+    "serve": "python -m http.server -d dist || python3 -m http.server -d dist"
   },
   "devDependencies": {
     "typescript": "^5.7.3"
