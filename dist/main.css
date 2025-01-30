@@ -12,3 +12,37 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+#content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+button, input, select, textarea {
+  border: 1px solid #ccc;
+  border-radius: .3em;
+  font-size: large;
+  font-family: inherit;
+  padding-inline: .3em;
+  padding-block: .15em;
+  background-color: #f8f8f8;
+}
+
+input, select {
+  text-align: center;
+}
+
+textarea {
+  width: 90vw;
+}
