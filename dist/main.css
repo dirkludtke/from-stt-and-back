@@ -4,9 +4,12 @@ body {
 }
 
 #main {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 100vh;
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  width: min(95vw, 960px);
+  min-height: min(95vh, 540px);
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,11 +17,13 @@ body {
 }
 
 #content {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5em;
+  flex-grow: 1;
 }
 
 
@@ -44,5 +49,7 @@ input, select {
 }
 
 textarea {
-  width: 90vw;
+  width: 100%;
+  flex-grow: 14;
+  box-sizing: border-box;
 }
