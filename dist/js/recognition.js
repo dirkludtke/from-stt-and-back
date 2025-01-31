@@ -18,7 +18,6 @@ function prepareRecognition(textDestination, languageSource) {
     // set language when it changes
     let oldOnchange = languageSource.onchange;
     languageSource.onchange = (event) => {
-        console.log('Language changed', languageSource.value);
         oldOnchange?.(event);
         recognition.lang = languageSource.value;
     };
