@@ -14,13 +14,12 @@
     .connection {
       fill: none;
       stroke: #ffffff;
-      stroke-width: 100;
-      stroke-dasharray: 0, 209;
-      stroke-linecap: round;
+      stroke-width: 101;
+      stroke-dasharray: 101, 101;
     }
   </style>
   <rect x="-1000" y="-1000" width="2000" height="2000" rx="200" class="background" />
   <circle cx="-400" cy="-400" r="400" class="foreground" />
-  <path d="M 50 0 L 50 800 L 800 400 Z" class="foreground" />
+  <path d="M 100 50 L 100 850 L 800 450 Z" class="foreground" />
   <path d="M 52 -598 A 600 600 0 1 1 -598 52" class="connection" />
 </svg>
