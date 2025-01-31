@@ -1,41 +1,34 @@
-let languages: Record<string, string> = {
-  'ca-ES': 'cat',
-  'de-DE': '🇩🇪',
-  'en-UK': '🇬🇧',
-  'en-US': '🇺🇸',
-  'es-ES': '🇪🇦',
-  'fr-FR': '🇫🇷',
-  'ja-JP': '🇯🇵',
-  'ru-RU': '🇷🇺',
-  'zh-CN': '🇨🇳',
-}
-
-let section = document.getElementById('content');
-if (section) {
-  main(section);
-}
-else {
-  console.log("Could not find section with id 'main'");
-}
+import { prepareRecognition } from "./recognition.js";
+import { prepareSynthesis } from "./synthesis.js";
 
 
+/**
+ * main function (which adds it content to the section provided).
+ * @param section parent HTML element to put the content in.
+ */
 function main(section: HTMLElement) {
   let controls = document.createElement('section');
   controls.classList.add('controls');
-  let sttButton = document.createElement('button');
-  sttButton.innerText = '⏺️ RECOGNIZE';
   let [langSelect, langField] = createLanguageSelect();
-  let ttsButton = document.createElement('button');
-  ttsButton.innerText = '▶️ SYNTHESIZE';
-  controls.replaceChildren(sttButton, langSelect, langField, ttsButton);
 
   let textArea = document.createElement('textarea');
-  textArea.rows = 5;
-  textArea.cols = 40;
+  textArea.placeholder = 'Type here or use RECOGNIZE button...';
+  textArea.rows = 4;
+
+  let sttButton = prepareRecognition(textArea, langField);
+  let ttsButton = prepareSynthesis(textArea, langField);
+  controls.replaceChildren(sttButton, langSelect, langField, ttsButton);
 
   section.replaceChildren(controls, textArea);
 }
 
+/**
+ * create the logic for selecting the language (allows to select by language code or by flag).
+ * it creates two HTML elements, a select element and an input element). the input field contains
+ * the language selected. the select element has a question mark option for the case that the
+ * selected language is not known.
+ * @returns two HTML elements created (a select element and an input element).
+ */
 function createLanguageSelect() {
   let langSelect = document.createElement('select');
   let notFoundOption = document.createElement('option');
@@ -59,6 +52,7 @@ function createLanguageSelect() {
 
   langSelect.onchange = () => {
     langField.value = langSelect.value;
+    langField.dispatchEvent(new Event('change'));
   };
   langField.onchange = () => {
     for (let option of langSelect.options) {
@@ -70,4 +64,25 @@ function createLanguageSelect() {
     notFoundOption.selected = true;
   };
   return [langSelect, langField];
- }
+}
+
+// pair language codes (as needed by the Web Speech API) with strings to display (e.g. the flag)
+let languages: Record<string, string> = {
+  'ca-ES': 'cat',
+  'de-DE': '🇩🇪',
+  'en-UK': '🇬🇧',
+  'en-US': '🇺🇸',
+  'es-ES': '🇪🇦',
+  'fr-FR': '🇫🇷',
+  'ja-JP': '🇯🇵',
+  'ru-RU': '🇷🇺',
+  'zh-CN': '🇨🇳',
+}
+
+let section = document.getElementById('content');
+if (section) {
+  main(section);
+}
+else {
+  console.log("Could not find section with id 'main'");
+}
