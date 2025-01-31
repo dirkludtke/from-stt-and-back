@@ -1,6 +1,6 @@
 {
   "name": "from-stt-and-back",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "From Speech to Text and Back: Exploring the Web Speech API",
   "author": "Dirk Lüdtke",
   "license": "MIT",
