@@ -25,11 +25,13 @@ function prepareRecognition(textDestination, languageSource) {
     sttButton.innerText = '⏺️ RECOGNIZE';
     sttButton.onclick = () => {
         if (isRecognizing) {
+            sttButton.classList.remove('recording');
             sttButton.innerText = '⏺️ RECOGNIZE';
             recognition.stop();
             isRecognizing = false;
         }
         else {
+            sttButton.classList.add('recording');
             sttButton.innerText = '⏹️ STOP REC';
             recognition.start();
             isRecognizing = true;

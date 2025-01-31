@@ -44,6 +44,26 @@ button, input, select, textarea {
   background-color: #f8f8f8;
 }
 
+button:active {
+  background-color: #3178c6;
+}
+
+.recording {
+  animation: cycle 2.5s infinite ease-in-out;
+}
+
+@keyframes cycle {
+  0% {
+    background-color: #3179c6;
+  }
+  50% {
+    background-color: #f8f8f8;
+  }
+  100% {
+    background-color: #3179c6;
+  }  
+}
+
 input, select {
   text-align: center;
 }
