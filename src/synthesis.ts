@@ -43,6 +43,14 @@ function prepareSynthesis(textSource: StringSource, languageSource: StringSource
 async function synthesize(synthesis: SpeechSynthesis, text: string, language: string) {
   let utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = language;
+
+  // Without the following, voice remains in OS language on iOS
+  let voices = synthesis.getVoices().filter((voice) => voice.lang === language);
+  console.log(`${voices.length} voice${voices.length == 1 ? '' : 's'} available for ${language}`);
+  if (voices) {
+    utterance.voice = voices[0];
+  }
+
   synthesis.speak(utterance);
 }
 
