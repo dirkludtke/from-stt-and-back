@@ -24,7 +24,7 @@ interface MySpeechRecognition {
   maxAlternatives: number;
   start(): void;
   stop(): void;
-  onresult: ((event: {results: SpeechRecognitionResultList}) => void) | null;
+  onresult: (event: {resultIndex: number, results: SpeechRecognitionResultList}) => void;
 }
 
 
