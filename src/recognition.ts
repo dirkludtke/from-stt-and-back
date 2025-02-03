@@ -39,16 +39,22 @@ interface MySpeechRecognition {
  */
 function prepareRecognition(textDestination: TextDestination, languageSource: StringSource) {
   let sttButton = document.createElement('button');
-  let recognition = createRecognition(textDestination);
+  let isRecognizing = false;
+  let onend = () => {
+    sttButton.classList.remove('recording');
+    sttButton.innerText = '⏺️ RECOGNIZE';
+    isRecognizing = false;
+  }
+
+
+  let recognition = createRecognition(textDestination, onend);
   if (recognition === undefined) {
     console.log('Speech recognition not available');
     sttButton.innerText = '😭 NO RECOGNIZE';
     sttButton.disabled = true;
     return sttButton;
   }
-
   recognition.lang = languageSource.value;
-  let isRecognizing = false;
 
   // set language when it changes
   let oldOnchange = languageSource.onchange;
@@ -77,9 +83,10 @@ function prepareRecognition(textDestination: TextDestination, languageSource: St
 /**
  * create a SpeechRecognition object if supported by the browser.
  * @param textDestination destination of the recognized text.
+ * @param onend callback function for if speech recognition stops by itself.
  * @returns the created SpeechRecognition object or undefined if speech recognition is not supported.
  */
-function createRecognition(textDestination: TextDestination) {
+function createRecognition(textDestination: TextDestination, onend: () => void) {
   let Recognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
   if (Recognition === undefined) return;
 
@@ -104,7 +111,7 @@ function createRecognition(textDestination: TextDestination) {
     console.log('speech recognition error', event);
   }
   recognition.onend = () => {
-    console.log('speech recognition stopped');
+    onend();
   }
   return recognition as MySpeechRecognition;
 }
