@@ -25,6 +25,9 @@ interface MySpeechRecognition {
   start(): void;
   stop(): void;
   onresult: (event: {resultIndex: number, results: SpeechRecognitionResultList}) => void;
+  onerror: (event: any) => void;
+  onstart: () => void;
+  onend: () => void;
 }
 
 
@@ -96,6 +99,12 @@ function createRecognition(textDestination: TextDestination) {
       resultList.push(result[0].transcript); // only use the first alternative
     }
     textDestination.value = resultList.join('');
+  }
+  recognition.onerror = (event) => {
+    console.log('speech recognition error', event);
+  }
+  recognition.onend = () => {
+    console.log('speech recognition stopped');
   }
   return recognition as MySpeechRecognition;
 }

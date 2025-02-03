@@ -63,6 +63,12 @@ function createRecognition(textDestination) {
         }
         textDestination.value = resultList.join('');
     };
+    recognition.onerror = (event) => {
+        console.log('speech recognition error', event);
+    };
+    recognition.onend = () => {
+        console.log('speech recognition stopped');
+    };
     return recognition;
 }
 export { prepareRecognition };
