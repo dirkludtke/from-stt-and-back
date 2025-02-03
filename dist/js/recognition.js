@@ -49,10 +49,15 @@ function createRecognition(textDestination) {
         return;
     let recognition = new Recognition();
     recognition.interimResults = true;
-    recognition.continuous = true;
+    // the continuous property behaves differently between Chrome on Android (each result contains
+    // the complete phrase recognized so far) and Linux Chrome (results only contain the last part).
+    // this makes it unusable.
+    // recognition.continuous = true;
     recognition.maxAlternatives = 1;
     recognition.onresult = (event) => {
         let resultList = [];
+        // in theory, recognition should only produce one result (which changes with each onresult call).
+        // however, we have seen more than one (when recognition of the last phrase was imprecise).
         for (let result of event.results) {
             resultList.push(result[0].transcript); // only use the first alternative
         }
