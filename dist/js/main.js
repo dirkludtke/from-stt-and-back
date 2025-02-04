@@ -62,7 +62,7 @@ function createLanguageSelect() {
 let languages = {
     'ca-ES': 'cat',
     'de-DE': '🇩🇪',
-    'en-UK': '🇬🇧',
+    'en-GB': '🇬🇧',
     'en-US': '🇺🇸',
     'es-ES': '🇪🇦',
     'fr-FR': '🇫🇷',

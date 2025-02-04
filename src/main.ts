@@ -70,7 +70,7 @@ function createLanguageSelect() {
 let languages: Record<string, string> = {
   'ca-ES': 'cat',
   'de-DE': '🇩🇪',
-  'en-UK': '🇬🇧',
+  'en-GB': '🇬🇧',
   'en-US': '🇺🇸',
   'es-ES': '🇪🇦',
   'fr-FR': '🇫🇷',
